@@ -2,7 +2,7 @@
 
 ### K A M A L &nbsp;&nbsp; B U R A
 
-**Embedded systems · robotics · UAV security research**
+**Embedded systems · robotics · security**
 
 </div>
 
@@ -29,11 +29,6 @@ motion is a **lease rather than a latch**: the MCU brakes within 300 ms unless t
 keeps renewing permission, so a crashed process or an unplugged cable stops the robot
 without depending on the Pi behaving correctly. Sensors fail closed. The firmware's
 protocol and safety logic are tested twice, once in Python and once in C.
-
-**Post-quantum cryptography on UAV links** — ASCON, ML-KEM, ML-DSA, SPECK, NTRU and
-Saber benchmarked for latency, throughput and energy on Raspberry Pi 4 and 5, alongside
-reinforcement-learning schedulers that trade threat level against thermal and battery
-headroom. Most of this lives in private repositories while the work is under review.
 
 ---
 
@@ -76,13 +71,11 @@ headroom. Most of this lives in private repositories while the work is under rev
 
 **Languages** &nbsp; C · C++ · Python · JavaScript / TypeScript · C# · SQL · Lua
 
-**Embedded** &nbsp; ESP-IDF · Arduino · FreeRTOS · ESP-NOW · TinyUSB · MAVLink · I²C / I²S / SPI / UART
+**Embedded** &nbsp; ESP-IDF · Arduino · FreeRTOS · ESP-NOW · TinyUSB · I²C / I²S / SPI / UART
 
 **Robotics** &nbsp; ZeroMQ · ONNX Runtime · YOLO · MPU6050 sensor fusion · PID and slew-rate control
 
 **ML** &nbsp; PyTorch · XGBoost · scikit-learn · Optuna
-
-**Crypto** &nbsp; liboqs · ASCON · ML-KEM · ML-DSA · mbedTLS
 
 **Data** &nbsp; PostgreSQL · Airflow · dbt · Docker
 
