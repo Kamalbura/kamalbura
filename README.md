@@ -1,87 +1,100 @@
 <div align="center">
 
-# Kamal Bura
+### K A M A L &nbsp;&nbsp; B U R A
 
-**Embedded systems · UAV security research · Data platforms**
+**Embedded systems · robotics · UAV security research**
 
 </div>
 
 ---
 
-I build things that run on constrained hardware and I research how to secure them.
-Most of my work sits at the boundary between firmware and the systems it talks to —
-flight controllers, sensor networks, ground stations — and increasingly on what happens
-when you put modern cryptography and machine learning on a device with a few hundred
-kilobytes of RAM and a battery budget.
+I build machines that have to keep working when something goes wrong.
 
-Three threads run through the repositories here:
+Most of what I do sits on the boundary between software that can be uncertain and
+hardware that cannot — a language model asking a robot to move, a control loop that
+must not miss its deadline, a radio link that has to fail closed rather than open.
+The interesting part is rarely the happy path. It is what happens when the network
+stalls, the sensor is unplugged, the packet is corrupt, or the controller stops
+responding entirely.
 
-**Embedded and hardware.** ESP32 and ESP-IDF, Arduino, Raspberry Pi. Cascaded PID
-control and IMU sensor fusion for multirotors, differential-steering RC platforms,
-USB HID over TinyUSB, I2S audio pipelines, and assistive devices. Where I can, I
-document the hardware as carefully as the code — bill of materials, wiring, and the
-failure modes I actually hit.
+---
 
-**Security research.** Post-quantum cryptography on UAV links — ASCON, ML-KEM, ML-DSA,
-SPECK, NTRU, Saber — benchmarked for latency, throughput and energy on Raspberry Pi 4
-and 5. Alongside that, DDoS detection on the same constrained hardware using XGBoost
-and Time Series Transformers, and reinforcement-learning schedulers that trade off
-threat level against thermal and battery state. I also take apart consumer hardware:
-a recent teardown of an Android projector surfaced preinstalled malware and a
-reproducible debloat path.
+## What I'm building
 
-**Data and ML platforms.** End-to-end pipelines rather than notebooks — ingestion with
-watermarked incremental loads, PostgreSQL, Airflow DAGs running on a Raspberry Pi,
-model training and forecasting, and a dashboard on top. I care about the boring parts:
-idempotent loads, lineage, and knowing when a model has gone stale.
+**A voice-controlled ground robot** on a Raspberry Pi 4 — wakeword to speech-to-text
+to an LLM to speech, and when the answer involves moving, a navigation command crosses
+a serial line to a microcontroller that owns the motors and is allowed to refuse.
+Eight Python services over ZeroMQ, on-device YOLO11n vision, and a safety layer where
+motion is a **lease rather than a latch**: the MCU brakes within 300 ms unless the Pi
+keeps renewing permission, so a crashed process or an unplugged cable stops the robot
+without depending on the Pi behaving correctly. Sensors fail closed. The firmware's
+protocol and safety logic are tested twice, once in Python and once in C.
+
+**Post-quantum cryptography on UAV links** — ASCON, ML-KEM, ML-DSA, SPECK, NTRU and
+Saber benchmarked for latency, throughput and energy on Raspberry Pi 4 and 5, alongside
+DDoS detection on the same constrained hardware and reinforcement-learning schedulers
+that trade threat level against thermal and battery headroom. Most of this lives in
+private repositories while the work is under review.
 
 ---
 
 ## Selected work
 
+### Robotics and control
+
+| | |
+|---|---|
+| **[esp32-rc-race-car](https://github.com/Kamalbura/esp32-rc-race-car)** | An RC car where **both ends of the radio link are mine** — a handheld ESP32-S3 transmitter and a receiver on the car over encrypted ESP-NOW at 100 Hz, with CRC-checked packets, a 120 ms failsafe, MPU6050 yaw assist and speed-dependent steering authority. Two generations documented, including why the second one uses *slower* motors. |
+| **[tank](https://github.com/Kamalbura/tank)** | Arduino Mega tank-steer robot — 10-channel RC, three-mode state machine, seven servos, timer-safe PWM |
+| **[esp32-car](https://github.com/Kamalbura/esp32-car)** | Sensor robot across four stages: Pi-tethered, full sensor suite, Wi-Fi dashboard with autonomous mode, then an Android app over Bluetooth |
+| **[DeskMate](https://github.com/Kamalbura/DeskMate)** | ESP32-S3 desk companion with an animated expressive face, gesture reactions, idle sleep and OTA updates |
+
 ### Systems and platforms
-| Project | What it is |
-|---|---|
-| [final_year](https://github.com/Kamalbura/final_year) | Air quality forecasting platform: Open-Meteo ingestion, PostgreSQL with watermarks, per-city Airflow DAGs on a Pi, 7-day forecasting, Next.js dashboard |
-| [d-detectetion](https://github.com/Kamalbura/d-detectetion) | Modular DDoS detection for Raspberry Pi — XGBoost or Time Series Transformer over a shared pipeline, with INT8 quantisation |
-| [agent-q](https://github.com/Kamalbura/agent-q) | Windows accessibility overlay in WPF/.NET 8 — screen context capture, LLM action planning, validation and safety layer before execution |
 
-### Hardware and firmware
-| Project | What it is |
+| | |
 |---|---|
-| [DeskMate](https://github.com/Kamalbura/DeskMate) | ESP32-S3 desk companion with an animated expressive face, MPU6050 gesture reactions, idle sleep and OTA updates |
-| [RC-cyber-truck](https://github.com/Kamalbura/RC-cyber-truck) | ESP32 RC vehicle: differential steering, interrupt-driven RC decoding, BTS7960 motor control, signal-loss failsafe |
-| [tank](https://github.com/Kamalbura/tank) | Arduino Mega tank-steer robot — 10-channel RC, three-mode state machine, seven servos, timer-safe PWM |
-| [avhzy-ct3-tcp](https://github.com/Kamalbura/avhzy-ct3-tcp) | Live power measurement streamed off an AVHzY CT-3 meter over TCP — Lua on the meter, Python on the host |
+| **[final_year](https://github.com/Kamalbura/final_year)** | Air quality forecasting platform — Open-Meteo ingestion, PostgreSQL with watermarked incremental loads, per-city Airflow DAGs running on a Raspberry Pi, a nine-model zoo behind a factory with Optuna tuning, and a Next.js dashboard |
+| **[d-detectetion](https://github.com/Kamalbura/d-detectetion)** | Modular DDoS detection for Raspberry Pi — XGBoost or a Time Series Transformer over a shared pipeline, with INT8 quantisation |
+| **[agent-q](https://github.com/Kamalbura/agent-q)** | Windows accessibility overlay in WPF/.NET 8 — captures screen context, plans actions through an LLM adapter, and validates them behind a safety layer before execution |
 
-### Reverse engineering
-| Project | What it is |
-|---|---|
-| [orange-box-s40-teardown](https://github.com/Kamalbura/orange-box-s40-teardown) | Full teardown of an Android projector: partition and boot-chain analysis, device tree, preinstalled malware findings, debloat results, custom Linux feasibility |
+### Security and reverse engineering
 
-### Sensing and web
-| Project | What it is |
+| | |
 |---|---|
-| [Air-quality-monitoring](https://github.com/Kamalbura/Air-quality-monitoring) | ESP32 → ThingSpeak → Node/Express dashboard with a Python analytics pipeline and CSV fallback |
-| [pi-nas](https://github.com/Kamalbura/pi-nas) | Raspberry Pi 4B NAS build, documented, with a live status page |
-| [portfolio](https://github.com/Kamalbura/portfolio) | Next.js 15 / React 19 portfolio — GSAP, Lenis, Tailwind 4, WCAG 2.1 AA |
+| **[orange-box-s40-teardown](https://github.com/Kamalbura/orange-box-s40-teardown)** | Full teardown of an Android projector: partition and boot-chain analysis, device tree, driver and kernel module inventory — and preinstalled malware, with a reproducible debloat path and a custom-Linux feasibility assessment |
+
+### Sensing and instrumentation
+
+| | |
+|---|---|
+| **[Air-quality-monitoring](https://github.com/Kamalbura/Air-quality-monitoring)** | ESP32 to ThingSpeak to a Node/Express dashboard, with a Python analytics pipeline and local CSV fallback |
+| **[avhzy-ct3-tcp](https://github.com/Kamalbura/avhzy-ct3-tcp)** | Live voltage, current and power streamed off an AVHzY CT-3 meter over TCP — Lua on the meter, Python on the host |
+| **[pi-nas](https://github.com/Kamalbura/pi-nas)** | Raspberry Pi 4B NAS build, documented, with a live status page |
 
 ---
 
 ## Tools
 
-**Languages** C · C++ · Python · JavaScript / TypeScript · C# · SQL · Lua
-**Embedded** ESP-IDF · Arduino · FreeRTOS · TinyUSB · MAVLink · I2C / I2S / UART · PlatformIO
-**ML** PyTorch · XGBoost · scikit-learn · Optuna · ONNX
-**Crypto** liboqs · ASCON · ML-KEM · ML-DSA · mbedTLS
-**Data** PostgreSQL · Airflow · dbt · Docker
-**Web** Next.js · React · Node / Express · Tailwind
+**Languages** &nbsp; C · C++ · Python · JavaScript / TypeScript · C# · SQL · Lua
+
+**Embedded** &nbsp; ESP-IDF · Arduino · FreeRTOS · ESP-NOW · TinyUSB · MAVLink · I²C / I²S / SPI / UART
+
+**Robotics** &nbsp; ZeroMQ · ONNX Runtime · YOLO · MPU6050 sensor fusion · PID and slew-rate control
+
+**ML** &nbsp; PyTorch · XGBoost · scikit-learn · Optuna
+
+**Crypto** &nbsp; liboqs · ASCON · ML-KEM · ML-DSA · mbedTLS
+
+**Data** &nbsp; PostgreSQL · Airflow · dbt · Docker
+
+**Web** &nbsp; Next.js · React · Node / Express · Tailwind
 
 ---
 
 <div align="center">
 
-Some of my research lives in private repositories while the work is under review.
-Happy to talk about it — reach me at the address on my GitHub profile.
+I try to document what is *actually* true of a system, including the parts that
+are not finished yet — a README that overstates what works costs more than one
+that admits a gap.
 
 </div>
