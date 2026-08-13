@@ -63,7 +63,6 @@ flashed, so the motion lease is not in effect on the robot until that cutover ha
 |---|---|
 | **[Air-quality-monitoring](https://github.com/Kamalbura/Air-quality-monitoring)** | ESP32 to ThingSpeak to a Node/Express dashboard, with a Python analytics pipeline and local CSV fallback |
 | **[avhzy-ct3-tcp](https://github.com/Kamalbura/avhzy-ct3-tcp)** | Live voltage, current and power streamed off an AVHzY CT-3 meter over TCP — Lua on the meter, Python on the host |
-| **[pi-nas](https://github.com/Kamalbura/pi-nas)** | Raspberry Pi 4B NAS build, documented, with a live status page |
 
 ### Security
 
