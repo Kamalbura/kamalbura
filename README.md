@@ -21,14 +21,20 @@ responding entirely.
 
 ## What I'm building
 
-**A voice-controlled ground robot** on a Raspberry Pi 4 — wakeword to speech-to-text
-to an LLM to speech, and when the answer involves moving, a navigation command crosses
-a serial line to a microcontroller that owns the motors and is allowed to refuse.
-Eight Python services over ZeroMQ, on-device YOLO11n vision, and a safety layer where
-motion is a **lease rather than a latch**: the MCU brakes within 300 ms unless the Pi
+**A voice-controlled ground robot** on a Raspberry Pi 4 — wakeword to speech-to-text to
+an LLM to speech, and when the answer involves moving, a navigation command crosses a
+serial line to a microcontroller that owns the motors and is allowed to refuse.
+
+The base system has worked end to end on hardware for some time. The current release is
+a hardening layer on top of it: watchdogs, a framed link protocol with a **motion
+deadman**, fail-closed sensors, request correlation and an encrypted app channel.
+Motion becomes a lease rather than a latch — the MCU brakes within 300 ms unless the Pi
 keeps renewing permission, so a crashed process or an unplugged cable stops the robot
-without depending on the Pi behaving correctly. Sensors fail closed. The firmware's
-protocol and safety logic are tested twice, once in Python and once in C.
+without depending on the Pi behaving correctly.
+
+155 Python tests and 193 C checks passing. The protocol and safety logic are verified
+twice, once in each language. The firmware is code-complete and bench-tested but not yet
+flashed, so the motion lease is not in effect on the robot until that cutover happens.
 
 ---
 
@@ -38,8 +44,9 @@ protocol and safety logic are tested twice, once in Python and once in C.
 
 | | |
 |---|---|
+| **smart_car** *(private)* | Voice-controlled Raspberry Pi ground robot with a hard-real-time safety MCU. Eight Python services over ZeroMQ, on-device YOLO11n vision, and a framed CRC link protocol where motion is a lease the microcontroller can revoke. |
 | **[esp32-rc-race-car](https://github.com/Kamalbura/esp32-rc-race-car)** | An RC car where **both ends of the radio link are mine** — a handheld ESP32-S3 transmitter and a receiver on the car over encrypted ESP-NOW at 100 Hz, with CRC-checked packets, a 120 ms failsafe, MPU6050 yaw assist and speed-dependent steering authority. Two generations documented, including why the second one uses *slower* motors. |
-| **[tank](https://github.com/Kamalbura/tank)** | Arduino Mega tank-steer robot — 10-channel RC, three-mode state machine, seven servos, timer-safe PWM |
+| **[rc-rover-arm](https://github.com/Kamalbura/rc-rover-arm)** | Arduino Mega tank-steer rover with a seven-servo arm — 10-channel RC, three-mode state machine, counter-rotation turns, timer-safe PWM |
 | **[esp32-car](https://github.com/Kamalbura/esp32-car)** | Sensor robot across four stages: Pi-tethered, full sensor suite, Wi-Fi dashboard with autonomous mode, then an Android app over Bluetooth |
 | **[DeskMate](https://github.com/Kamalbura/DeskMate)** | ESP32-S3 desk companion with an animated expressive face, gesture reactions, idle sleep and OTA updates |
 
