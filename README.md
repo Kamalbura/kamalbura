@@ -32,9 +32,8 @@ protocol and safety logic are tested twice, once in Python and once in C.
 
 **Post-quantum cryptography on UAV links** — ASCON, ML-KEM, ML-DSA, SPECK, NTRU and
 Saber benchmarked for latency, throughput and energy on Raspberry Pi 4 and 5, alongside
-DDoS detection on the same constrained hardware and reinforcement-learning schedulers
-that trade threat level against thermal and battery headroom. Most of this lives in
-private repositories while the work is under review.
+reinforcement-learning schedulers that trade threat level against thermal and battery
+headroom. Most of this lives in private repositories while the work is under review.
 
 ---
 
@@ -53,15 +52,8 @@ private repositories while the work is under review.
 
 | | |
 |---|---|
-| **[final_year](https://github.com/Kamalbura/final_year)** | Air quality forecasting platform — Open-Meteo ingestion, PostgreSQL with watermarked incremental loads, per-city Airflow DAGs running on a Raspberry Pi, a nine-model zoo behind a factory with Optuna tuning, and a Next.js dashboard |
-| **[d-detectetion](https://github.com/Kamalbura/d-detectetion)** | Modular DDoS detection for Raspberry Pi — XGBoost or a Time Series Transformer over a shared pipeline, with INT8 quantisation |
+| **[air-quality-forecasting](https://github.com/Kamalbura/air-quality-forecasting)** | End-to-end forecasting platform — Open-Meteo ingestion, PostgreSQL with watermarked incremental loads, per-city Airflow DAGs running on a Raspberry Pi, a nine-model zoo behind a factory with Optuna tuning, and a Next.js dashboard |
 | **[agent-q](https://github.com/Kamalbura/agent-q)** | Windows accessibility overlay in WPF/.NET 8 — captures screen context, plans actions through an LLM adapter, and validates them behind a safety layer before execution |
-
-### Security and reverse engineering
-
-| | |
-|---|---|
-| **[orange-box-s40-teardown](https://github.com/Kamalbura/orange-box-s40-teardown)** | Full teardown of an Android projector: partition and boot-chain analysis, device tree, driver and kernel module inventory — and preinstalled malware, with a reproducible debloat path and a custom-Linux feasibility assessment |
 
 ### Sensing and instrumentation
 
@@ -70,6 +62,13 @@ private repositories while the work is under review.
 | **[Air-quality-monitoring](https://github.com/Kamalbura/Air-quality-monitoring)** | ESP32 to ThingSpeak to a Node/Express dashboard, with a Python analytics pipeline and local CSV fallback |
 | **[avhzy-ct3-tcp](https://github.com/Kamalbura/avhzy-ct3-tcp)** | Live voltage, current and power streamed off an AVHzY CT-3 meter over TCP — Lua on the meter, Python on the host |
 | **[pi-nas](https://github.com/Kamalbura/pi-nas)** | Raspberry Pi 4B NAS build, documented, with a live status page |
+
+### Security
+
+| | |
+|---|---|
+| **[orange-box-s40-teardown](https://github.com/Kamalbura/orange-box-s40-teardown)** | Full teardown of an Android projector: partition and boot-chain analysis, device tree, driver and kernel module inventory — and preinstalled malware, with a reproducible debloat path and a custom-Linux feasibility assessment |
+| **[d-detectetion](https://github.com/Kamalbura/d-detectetion)** | Modular DDoS detection for Raspberry Pi — XGBoost or a Time Series Transformer over a shared pipeline, with INT8 quantisation |
 
 ---
 
