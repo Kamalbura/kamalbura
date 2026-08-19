@@ -70,7 +70,6 @@ working system and the remaining verification work.
 | | |
 |---|---|
 | **[orange-box-s40-teardown](https://github.com/Kamalbura/orange-box-s40-teardown)** | Full teardown of an Android projector: partition and boot-chain analysis, device tree, driver and kernel module inventory — and preinstalled malware, with a reproducible debloat path and a custom-Linux feasibility assessment |
-| **[d-detectetion](https://github.com/Kamalbura/d-detectetion)** | Modular DDoS detection for Raspberry Pi — XGBoost or a Time Series Transformer over a shared pipeline, with INT8 quantisation |
 
 ---
 
