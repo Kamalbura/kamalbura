@@ -1,98 +1,48 @@
 <div align="center">
 
-### K A M A L &nbsp;&nbsp; B U R A
+# Kamal Bura
 
-**Embedded systems · robotics · security**
+### AI · Software · Embedded · Robotics
+
+I build intelligent systems that connect software, models, and real-world hardware.
+
+[Explore Embedded & Robotics](./EMBEDDED.md) · [Explore AI & Software](./AI_SOFTWARE.md)
 
 </div>
 
 ---
 
-I build machines that have to keep working when something goes wrong.
+## Featured systems
 
-Most of what I do sits on the boundary between software that can be uncertain and
-hardware that cannot — a language model asking a robot to move, a control loop that
-must not miss its deadline, a radio link that has to fail closed rather than open.
-The interesting part is rarely the happy path. It is what happens when the network
-stalls, the sensor is unplugged, the packet is corrupt, or the controller stops
-responding entirely.
-
----
-
-## What I'm building
-
-**A voice-controlled ground robot** on a Raspberry Pi 4 — wakeword to speech-to-text to
-an LLM to speech, and when the answer involves moving, a navigation command crosses a
-serial line to a microcontroller that owns the motors and is allowed to refuse.
-
-The base system runs end to end on hardware. Its MCU stops the robot when an obstacle is
-detected and publishes status telemetry to the Pi; both behaviours are verified on the
-physical robot.
-
-Current work focuses on completing the framed UART motion-lease path and enforcing TLS
-for app-to-Pi traffic. The running Pi bridge still uses the legacy ASCII protocol, so the
-additional cable-loss guarantees of the framed path are not claimed until both ends are
-deployed and verified together.
-
-The protocol and safety logic are tested in Python and C. The project documents both the
-working system and the remaining verification work.
-
----
-
-## Selected work
-
-### Robotics and control
-
-| | |
+| System | What it demonstrates |
 |---|---|
-| **[smart_car](https://github.com/Kamalbura/smart_car)** | Voice-controlled Raspberry Pi ground robot with an MCU safety layer. It combines Python services over ZeroMQ, on-device vision, obstacle stopping, and status telemetry verified on hardware. |
-| **[esp32-rc-race-car](https://github.com/Kamalbura/esp32-rc-race-car)** | An RC car where **both ends of the radio link are mine** — a handheld ESP32-S3 transmitter and a receiver on the car over encrypted ESP-NOW at 100 Hz, with CRC-checked packets, a 120 ms failsafe, MPU6050 yaw assist and speed-dependent steering authority. Two generations documented, including why the second one uses *slower* motors. |
-| **[DeskMate](https://github.com/Kamalbura/DeskMate)** | ESP32-S3 desk companion with an animated expressive face, gesture reactions, idle sleep and OTA updates |
-| **[rc-rover-arm](https://github.com/Kamalbura/rc-rover-arm)** | Arduino Mega tank-steer rover with a seven-servo arm — 10-channel RC, three-mode state machine, counter-rotation turns, timer-safe PWM |
-| **[esp32-car](https://github.com/Kamalbura/esp32-car)** | Sensor robot across four stages: Pi-tethered, full sensor suite, Wi-Fi dashboard with autonomous mode, then an Android app over Bluetooth |
+| [**Smart Car**](https://github.com/Kamalbura/smart_car) | Voice → language model → navigation → MCU → motors. A Raspberry Pi system with an MCU safety layer; obstacle stopping and status telemetry are verified on hardware. |
+| [**Air Quality Forecasting**](https://github.com/Kamalbura/air-quality-forecasting) | Data ingestion → Airflow → PostgreSQL → machine learning → dashboard. An end-to-end forecasting platform built for repeatable data and deployment workflows. |
+| [**Agent-Q**](https://github.com/Kamalbura/agent-q) | Screen context → language model → planning → validation → action. A Windows accessibility overlay that keeps a validation step between an agent and user-facing actions. |
+| [**ESP32 RC Race Car**](https://github.com/Kamalbura/esp32-rc-race-car) | Controller → ESP-NOW → receiver → control loop → motors. A real-time wireless control system with CRC-checked packets, failsafe behaviour, and yaw-assisted steering. |
 
-### Systems and platforms
+These systems are intentionally cross-disciplinary. They combine software
+engineering with the constraints that matter when code controls devices:
+latency, unreliable networks, sensor faults, power, and safe failure modes.
 
-| | |
+## Explore by specialization
+
+| [Embedded & Robotics](./EMBEDDED.md) | [AI & Software](./AI_SOFTWARE.md) |
 |---|---|
-| **[air-quality-forecasting](https://github.com/Kamalbura/air-quality-forecasting)** | End-to-end forecasting platform — Open-Meteo ingestion, PostgreSQL with watermarked incremental loads, per-city Airflow DAGs running on a Raspberry Pi, a nine-model zoo behind a factory with Optuna tuning, and a Next.js dashboard |
-| **[agent-q](https://github.com/Kamalbura/agent-q)** | Windows accessibility overlay in WPF/.NET 8 — captures screen context, plans actions through an LLM adapter, and validates them behind a safety layer before execution |
+| Microcontrollers, real-time control, sensors, wireless links, Linux edge systems, and robotics. | AI systems, data platforms, software architecture, ML workflows, and user-facing applications. |
 
-### Sensing and instrumentation
+## Core tools
 
-| | |
-|---|---|
-| **[Air-quality-monitoring](https://github.com/Kamalbura/Air-quality-monitoring)** | ESP32 to ThingSpeak to a Node/Express dashboard, with a Python analytics pipeline and local CSV fallback |
-| **[avhzy-ct3-tcp](https://github.com/Kamalbura/avhzy-ct3-tcp)** | Live voltage, current and power streamed off an AVHzY CT-3 meter over TCP — Lua on the meter, Python on the host |
-
-### Security
-
-| | |
-|---|---|
-| **[orange-box-s40-teardown](https://github.com/Kamalbura/orange-box-s40-teardown)** | Full teardown of an Android projector: partition and boot-chain analysis, device tree, driver and kernel module inventory — and preinstalled malware, with a reproducible debloat path and a custom-Linux feasibility assessment |
-
----
-
-## Tools
-
-**Languages** &nbsp; C · C++ · Python · JavaScript / TypeScript · C# · SQL · Lua
-
-**Embedded** &nbsp; ESP-IDF · Arduino · FreeRTOS · ESP-NOW · TinyUSB · I²C / I²S / SPI / UART
-
-**Robotics** &nbsp; ZeroMQ · ONNX Runtime · YOLO · MPU6050 sensor fusion · PID and slew-rate control
-
-**ML** &nbsp; PyTorch · XGBoost · scikit-learn · Optuna
-
-**Data** &nbsp; PostgreSQL · Airflow · dbt · Docker
-
-**Web** &nbsp; Next.js · React · Node / Express · Tailwind
+**Languages:** C · C++ · Python · TypeScript · JavaScript · C# · SQL · Lua<br>
+**Embedded:** ESP-IDF · Arduino · FreeRTOS · ESP-NOW · TinyUSB · I²C · I²S · SPI · UART<br>
+**AI and data:** LLM systems · PyTorch · XGBoost · scikit-learn · Airflow · PostgreSQL<br>
+**Software and platform:** Docker · Next.js · React · Node.js · .NET
 
 ---
 
 <div align="center">
 
-I try to document what is *actually* true of a system, including the parts that
-are not finished yet — a README that overstates what works costs more than one
-that admits a gap.
+I document what a system does today, what has been verified, and what still
+needs to be proven.
 
 </div>
