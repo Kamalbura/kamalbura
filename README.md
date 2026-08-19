@@ -47,9 +47,9 @@ working system and the remaining verification work.
 |---|---|
 | **[smart_car](https://github.com/Kamalbura/smart_car)** | Voice-controlled Raspberry Pi ground robot with an MCU safety layer. It combines Python services over ZeroMQ, on-device vision, obstacle stopping, and status telemetry verified on hardware. |
 | **[esp32-rc-race-car](https://github.com/Kamalbura/esp32-rc-race-car)** | An RC car where **both ends of the radio link are mine** — a handheld ESP32-S3 transmitter and a receiver on the car over encrypted ESP-NOW at 100 Hz, with CRC-checked packets, a 120 ms failsafe, MPU6050 yaw assist and speed-dependent steering authority. Two generations documented, including why the second one uses *slower* motors. |
+| **[DeskMate](https://github.com/Kamalbura/DeskMate)** | ESP32-S3 desk companion with an animated expressive face, gesture reactions, idle sleep and OTA updates |
 | **[rc-rover-arm](https://github.com/Kamalbura/rc-rover-arm)** | Arduino Mega tank-steer rover with a seven-servo arm — 10-channel RC, three-mode state machine, counter-rotation turns, timer-safe PWM |
 | **[esp32-car](https://github.com/Kamalbura/esp32-car)** | Sensor robot across four stages: Pi-tethered, full sensor suite, Wi-Fi dashboard with autonomous mode, then an Android app over Bluetooth |
-| **[DeskMate](https://github.com/Kamalbura/DeskMate)** | ESP32-S3 desk companion with an animated expressive face, gesture reactions, idle sleep and OTA updates |
 
 ### Systems and platforms
 
